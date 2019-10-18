@@ -1,4 +1,3 @@
-
 # 1. CIFAR-10 로딩 및 정규화
 import torch
 import torchvision
@@ -72,7 +71,10 @@ class Net(nn.Module):
         x = self.fc3(x)
         return x
 
-net = Net()
+# net = Net()
+
+import torchvision.models as models
+net = models.resnet18()
 
 
 # 3. 손실 함수 및 optimizer 정의
@@ -84,9 +86,12 @@ optimizer = optim.SGD(net.parameters(),
                       momentum = 0.9)
 
 # 4. 네트워크 학습
-for epoch in range(2):
+epochs = 2
 
+for epoch in range(epochs):
+    print('\n ===> epoch %d' % epoch)
     running_loss = 0.0
+
     for i, data in enumerate(trainloader, 0):
         inputs, labels = data
 
@@ -98,8 +103,10 @@ for epoch in range(2):
         optimizer.step()
 
         running_loss += loss.item()
+
         if i % 2000 == 1999:
-            print('[%d, %5d] loss: 5.3f' % epoch + 1, i + 1, running_loss / 2000)
+            print('[%d, %5d] loss: 5.3f' %
+                  (epoch + 1, i + 1, running_loss / 2000))
             running_loss = 0.0
 
 print('Finished Tranining')
