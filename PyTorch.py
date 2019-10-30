@@ -125,3 +125,5 @@ _, predicted = torch.max(outputs, 1)
 
 print('Predicted: ', ' '.join('%5s' % classes[predicted[j]] for j in range(4)))
 
+
+
